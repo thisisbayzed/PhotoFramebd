@@ -1,9 +1,9 @@
 {
   "name": "photoframebd-render-entry",
   "private": true,
-  "description": "Used when Render Root Directory is set to src",
+  "description": "Render entry when Root Directory is set to src",
   "scripts": {
-    "postinstall": "cd .. && npm install --include=dev && npm run build",
+    "postinstall": "cd .. && node scripts/render-postinstall.js",
     "start": "node ../dist/index.js"
   }
 }

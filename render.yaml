@@ -3,7 +3,7 @@ services:
     name: photoframebd-backend
     runtime: node
     plan: free
-    buildCommand: npm install --include=dev && npm run build
+    buildCommand: npm install --include=dev --ignore-scripts && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
