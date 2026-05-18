@@ -5,12 +5,13 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc",
-    "start": "node ./dist/index.js",
+    "build": "tsc && node scripts/sync-dist.js",
+    "start": "node dist/index.js",
+    "postinstall": "node scripts/render-postinstall.js",
     "render:build": "npm install --include=dev && npm run build"
   },
   "engines": {
-    "node": ">=18"
+    "node": "20.x"
   },
   "keywords": [],
   "author": "",
