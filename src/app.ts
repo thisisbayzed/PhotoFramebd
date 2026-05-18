@@ -21,6 +21,7 @@ import {
   orderPublicRoutes,
 } from "./routes/order.routes";
 import userRoutes from "./routes/user.routes";
+import indexRoutes from "./routes/index.routes";
 
 const app = express();
 
@@ -35,6 +36,12 @@ app.use(
   }),
 );
 app.use(express.json());
+
+app.get("/", (_req, res) => {
+  res.redirect(302, "/api");
+});
+
+app.use("/api", indexRoutes);
 app.use("/api", healthRoutes);
 app.use("/api/admin", authRoutes);
 app.use("/api/admin/users", userRoutes);
@@ -48,5 +55,20 @@ app.use("/api/admin/orders", orderAdminRoutes);
 app.use("/api/admin/customers", customerRoutes);
 app.use("/api/testimonials", testimonialPublicRoutes);
 app.use("/api/admin/testimonials", testimonialAdminRoutes);
+
+app.use((req, res) => {
+  const path = req.path;
+  const hint =
+    !path.startsWith("/api") && path !== "/"
+      ? `Try /api${path} — all routes use the /api prefix.`
+      : "Check the README or GET /api for available endpoints.";
+
+  res.status(404).json({
+    success: false,
+    message: `Route not found: ${req.method} ${req.originalUrl}`,
+    hint,
+    health: "GET /api/health",
+  });
+});
 
 export default app;

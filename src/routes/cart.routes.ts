@@ -11,8 +11,8 @@ import {
 const router = Router();
 
 router.post("/", createCart);
-router.get("/:cartId", getCart);
 router.get("/:cartId/summary", getCartSummary);
+router.get("/:cartId", getCart);
 router.post("/:cartId/add", addToCart);
 router.delete("/:cartId/items/:productId", removeFromCart);
 router.delete("/:cartId", deleteCart);
